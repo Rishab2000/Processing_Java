@@ -1,0 +1,40 @@
+
+float theta;   
+
+
+  void setup() {
+  size (600, 600);
+
+}
+
+void draw() {
+    background(0);
+  float a = (mouseX / (float) width) * 90; // Maps mouseX location to a range between 0-90 
+  theta = radians(a); // Convert it to radians
+  stroke(255);
+  translate(width/2, height); // Set origin to (width/2, height)
+  line(0, 0, 0, -120);
+    translate(0, -120);
+  branch(120);
+}
+
+
+void branch(float h) {
+  h *= 0.66; // increment of to reduced the lenght of a branch each time the function is called
+
+  if (h > 2 ) {
+    pushMatrix();
+    rotate(theta);
+    line(0, 0, 0, -h);
+    translate(0, -h);
+    branch(h); // A recursive function
+    popMatrix();
+
+    pushMatrix();
+    rotate(-theta); // produces a branch with an angle opposite to the previous branch.
+    line(0, 0, 0, -h);
+    translate(0, -h);
+    branch(h);
+    popMatrix();
+  }
+}
