@@ -1,0 +1,40 @@
+
+float theta;   
+
+
+  void setup() {
+  size (600, 600);
+
+}
+
+void draw() {
+    background(0);
+  float a = (mouseX / (float) width) * 90; // Map the mouseX location between the range 0-90
+  theta = radians(a); // Convert it to radians
+  stroke(255);
+  translate(width/2, height);
+  line(0, 0, 0, -120);
+    translate(0, -120);
+  branch(120);
+}
+
+
+void branch(float h) {
+  h *= 0.66;
+
+  if (h > 2 ) {
+    pushMatrix();
+    rotate(theta);
+    line(0, 0, 0, -h);
+    translate(0, -h);
+    branch(h);
+    popMatrix();
+
+    pushMatrix();
+    rotate(-theta);
+    line(0, 0, 0, -h);
+    translate(0, -h);
+    branch(h);
+    popMatrix();
+  }
+}
