@@ -1,0 +1,19 @@
+plain p;
+
+void setup() {
+  size(600, 600, P3D);
+  p = new plain();
+}
+
+
+void draw() {
+
+ 
+
+
+  background(0);
+  stroke(255);
+  noFill();
+  p.render();
+  p.fly();
+ 
