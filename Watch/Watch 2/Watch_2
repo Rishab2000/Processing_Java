@@ -1,0 +1,20 @@
+clock c;
+
+void setup(){
+  size(500,500);
+  
+  c = new clock();
+  
+}
+
+
+void draw() {
+  background(0);
+  
+  c.seconds();
+  c.minutes();
+  c.hours();
+  //c.markingshr();
+  c.markingsmn();
+
+}
