@@ -1,0 +1,31 @@
+rain[] r = new rain[500];
+void setup() {
+  size(700, 600);
+  for (int i = 0; i<500; i++) {
+    r[i] = new rain(random(10, 40));
+  }
+}
+
+
+void draw() {
+  background(230,230,250);
+  for (int i = 0; i<500; i++) {
+    r[i].render();
+    r[i].fall();
+    r[i].edges();
+    r[i].block();
+  }
+}
+
+void keyPressed() {
+  for (int i = 0; i<500; i++) {
+    if (key==CODED) {
+      if (keyCode == RIGHT) {
+
+        r[i].y += 10;
+      } else if (keyCode == LEFT) {
+        r[i].y -= 10;
+      }
+    }
+  }
+}
