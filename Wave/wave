@@ -1,0 +1,17 @@
+lines l;
+
+
+void setup(){
+  size(500,600);
+ 
+  l = new lines();
+smooth();
+}
+
+void draw(){
+  background(0);
+   
+  l.oscillate();
+  l.render();
+   
+}
