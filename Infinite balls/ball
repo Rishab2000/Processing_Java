@@ -1,0 +1,67 @@
+class ball {
+  float x;
+  float y;
+  float speedx;
+  float speedy;
+  float r;
+  color col;
+
+
+
+  ball( float tempspeedx, float tempspeedy, float tempr) {
+    speedx=tempspeedx; //tempspeedx is a temporary variable that can only be used to declare the ball
+    speedy=tempspeedy;
+    r = tempr;
+    col=color(0, 0, 0);
+    x=-r;
+    y=random(0,height-r);
+  }
+ 
+  //function when the balls overlap eachother
+  
+  void overlap(ball other) {
+    float R= r+other.r;
+    float d = dist(x, y, other.x, other.y);
+
+    //defining the edges of the ball and waht happens when they overlap
+
+    if ( d < R) {
+      other.col = color(random(0, 255), random(0, 255), random(0, 255), 150);
+      col = color(255, 0, 0, 0);
+    } else {
+      other.col =color(0,0,0,1);
+      col = color(0,0,0,1);
+    }
+  }
+
+  void display() {
+    strokeWeight(2);
+    fill (col);
+    stroke(255);
+    circle(x, y, r*2);
+  }
+
+  void animate() {
+    x += speedx;
+    y += speedy;
+  }
+
+
+  void boundries(float tempspeedx, float tempspeedy) {
+    float z = x+r;
+    //bouncing in a way so that only so that the edges of the ball it the walls
+      if (x>width-r ) {
+        speedx = speedx * -1;
+      }
+      if (y>height-r || y<r) {
+        speedy = speedy * -1;
+      }
+    
+    if ( x< -r) {
+      x = -r;
+      y = random(0,height-r);
+      speedx = tempspeedx;
+      speedy = tempspeedy;
+    }
+  }
+}
