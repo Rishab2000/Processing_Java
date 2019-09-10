@@ -1,0 +1,18 @@
+lines[] l = new lines[60];
+void setup() {
+  size(400, 500);
+  for (int i = 0; i<10; i++) {
+    l[i] = new lines();
+  }
+}
+
+
+
+
+void draw() {
+  background(255);
+  for (int i = 0; i<10; i++) {
+    l[i].oscillate();
+    l[i].render();
+  }
+}
