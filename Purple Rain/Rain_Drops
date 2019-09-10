@@ -1,0 +1,46 @@
+class rain {
+
+  PVector loc;
+  PVector acc;
+  PVector vel;
+  float l;
+  float y;
+  float a;
+
+  rain(float htemp) {
+    l = random(10,40);
+    loc = new PVector(random(0, width), random(-700, 0));
+    acc = new PVector(0, l/2.5);
+    vel = new PVector(0, 0);
+  }
+
+
+  void render() {
+    float thick = map(l,10,40,1,2.5);
+    strokeWeight(thick);
+    stroke(138, 43, 226);
+    rectMode(CORNER);
+    line(loc.x, loc.y, loc.x, loc.y+l);
+    //rectMode(CENTER);
+  }
+  void block() {
+    fill(230, 230, 250);
+    noStroke();
+    rect(y, 500, 200, 500, 550, 550, 0, 0);
+    fill(0);
+    rect(y+85, 550, 30, 50);
+  }
+
+  void fall() {
+    loc.add(vel);
+    vel.add(acc);
+    acc.mult(0);
+  }
+
+  void edges() { 
+    if (loc.y > height) {
+      loc.y =random(-20, 0) ;
+      loc.x = random(0, width);
+    }
+  }
+}
