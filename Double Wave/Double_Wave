@@ -1,0 +1,13 @@
+lines l;
+
+void setup() {
+  size(1000, 500);
+  l = new lines();
+}
+
+
+void draw() {
+  background(0);
+  l.render();
+  l.oscillate();
+}
