@@ -1,0 +1,73 @@
+class lines {
+  float angle;
+  float angle2;
+  float angle3;
+  float angle4;
+  float angle5;
+  float angle6;
+  float angle7;
+  float angle8;
+  PVector vel;
+  PVector amp;
+  PVector amp1;
+  float y;
+  float angleVel=0.013;
+  float startangle = 0;
+
+  lines() {
+    //angle = new PVector(0, 0);
+    vel = new PVector(0.015, 0);
+    amp = new PVector(100, 0);
+    amp1 = new PVector(130, 0);
+  }
+
+  void oscillate() {
+    //angle.add(vel);
+    startangle += 0.01;
+   
+    
+    angle = startangle;
+    angle2 = startangle;
+    angle3 = startangle;
+    angle4 = startangle;
+    angle5 = startangle;
+    angle6 = startangle;
+    angle7 = startangle;
+    angle8 = startangle;
+  }
+
+  void render() {
+
+    //angle.add(vel);
+    for (float i = 0; i < height; i += 2) {
+      //float x = amp.x * sin(angle.x);
+      float x = map(sin(angle), -1, 1, 100, 400);
+      float x2 = map(sin(angle2), -1, 1, 90, 410);
+      float x3 = map(sin(angle3), -1, 1, 80, 420);
+      float x4 = map(sin(angle4), -1, 1, 70, 430);
+      float x5 = map(sin(angle5), -1, 1, 60, 440);
+      float x6 = map(sin(angle6), -1, 1, 50, 450);
+      float x7 = map(sin(angle7), -1, 1, 40, 460);
+      float x8 = map(sin(angle8), -1, 1, 30, 470);
+      //translate(width/2, 0);
+      stroke(255);
+      strokeWeight(2);
+      point(x, i);
+      point(x2, i);
+      point(x3, i);
+      point(x4, i);
+      point(x5, i);
+      point(x6, i);
+      point(x7, i);
+      point(x8, i);
+      angle += angleVel;
+      angle2 += 0.015;
+      angle3 += 0.018;
+      angle4 += 0.02;
+      angle5 += 0.023;
+      angle6 += 0.026;
+      angle7 += 0.029;
+      angle8 += 0.032;
+    }
+  }
+}
