@@ -1,0 +1,90 @@
+class particle {
+  PVector loc = new PVector(random(width), random(height));
+  PVector vel = new PVector(0, 0);
+  PVector acc = new PVector(0, 0);
+  float maxspeed;
+  int t;
+  PVector prevPos = loc.copy();
+  particle() {
+    maxspeed = 1;
+  }
+
+ public void render() {
+    stroke(245,215,42,50);
+    strokeWeight(1);
+    point(loc.x, loc.y);
+  }
+
+  public void update() {
+    vel.add(acc);
+    vel.limit(maxspeed);
+    loc.add(vel);
+    acc.mult(0);
+  }
+
+  public void follow(PVector[] vector) {
+    int x = floor(loc.x/scl);
+    int y = floor(loc.y/scl);
+    int index = (x-1) + ((y-1) * cols);
+    index = index - 1;
+    if (index > vector.length || index < 0) {
+      index = vector.length- 1;
+    }
+    PVector force = vector[index];
+    applyforce(force);
+  }
+
+  public void applyforce(PVector force) {
+    acc.add(force);
+  }
+
+ public void edges() {
+    if ( loc.x > width) {
+      loc.x = 0;
+      updatePrev();
+    }
+    if (loc.x < 0) {
+      loc.x = width;
+      updatePrev();
+    }
+    if ( loc.y > height) {
+      loc.y = 0;
+      updatePrev();
+    }
+    if (loc.y < 0) {
+      loc.y = height;
+      updatePrev();
+    }
+  }
+
+  boolean pause() {
+    if ( t==0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  boolean play() {
+    if (t==1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void pause_counter() {
+    if (t==0 || t == 1) {
+      t ++;
+    }
+  }
+
+  void play_counter() {
+    if (t==2) {
+      t=0;
+    }
+  }
+   void updatePrev() {
+    prevPos.x = loc.x;
+    prevPos.y = loc.y;
+  }
+}
