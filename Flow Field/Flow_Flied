@@ -1,0 +1,74 @@
+
+float xoff;
+float yoff;
+float zoff;
+int scl;
+int cols;
+int rows;
+PVector[] vector;
+particle[] p = new particle[10000];
+
+void setup() {
+  background(241, 141, 158);
+  size(1200, 800);
+  //orientation(LANDSCAPE);
+  //hint(DISABLE_DEPTH_MASK);
+  scl = 10;
+  cols = floor(width/scl);
+  rows = floor(height/scl);
+  vector = new PVector[(cols * rows)];
+  for (int i = 0; i < 1000; i++) {
+    p[i] = new particle();
+  }
+}
+
+void draw() {
+  //background(0);
+  yoff=0;
+  for (int y = 0; y < rows; y++) {
+    xoff=0;
+    for (int x = 0; x < cols; x++) {
+      int index = x + y * cols;
+      float s = noise(xoff, yoff, zoff) * TWO_PI ;
+      PVector v = PVector.fromAngle(s);
+      v.setMag(1);
+      vector[index] = v;
+      //pushMatrix();
+      //translate(x*scl, y*scl);
+      //rotate(v.heading());
+      //strokeWeight(1);
+      //stroke(255);
+      //line(0, 0, scl, 0);
+      //popMatrix();
+      xoff += 0.1;
+    }
+    yoff += 0.1;
+    //zoff = zoff + 0.00006;
+  }
+  zoff = zoff + 0.0006;
+  for (int i = 0; i < 1000; i++) {
+    p[i].follow(vector);
+
+    p[i].update();
+    p[i].edges();
+    p[i].render();
+  }
+}
+
+void mouseClicked() {
+  for (int i=0; i<1000; i++) {
+    if (p[i].pause()) {
+      noLoop();
+    }
+    if (p[i].play()) {
+      loop();
+    }
+    p[i].pause_counter();
+    p[i].play_counter();
+  }
+}
+
+void keyPressed() {
+    if (key=='s'||key=='S')
+      saveFrame("graphic-#######.jpg");
+  }
