@@ -1,0 +1,30 @@
+class lines {
+
+  float angle;
+  float amp = 500;
+
+  float angle1;
+  float amp1 = 10;
+
+  float startangle;
+
+  void oscillate() {
+    startangle += 0.015;
+    angle = startangle;
+    angle1 = startangle;
+  }
+
+  void render() {
+
+    for ( float i = 0; i <= width; i += 10) {
+      float x = 0;
+      x += map(cos(angle),-1,1,100,400);
+      x += map(sin(angle1),-1,1,0,50);
+      noStroke();
+      fill(255,50);
+      circle( i, x, 10);
+      angle += 0.1;
+      angle1 += 0.4;
+    }
+  }
+}
