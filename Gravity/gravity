@@ -1,0 +1,29 @@
+mover[] m = new mover[20];
+
+void setup() {
+  size (500, 400);
+  for (int i = 0; i<5; i++) {
+    m[i] = new mover(random(1, 4), random(0,width/2), 0 ); //Initialize mover array
+  }
+}
+
+void draw() {
+  background(255);
+  for (int i = 0; i<5; i++) {
+    PVector gravity = new PVector(0, 0.1);
+    gravity.mult(m[i].mass);
+    m[i].applyforce(gravity);
+    PVector friction = m[i].velocity.get();
+    friction.normalize();
+    friction.mult(-0.05);
+    m[i].applyforce(friction);
+
+    PVector wind = new PVector(0.01, 0);
+    m[i].applyforce(wind);
+
+
+    m[i].render();
+    m[i].update();
+    m[i].edges();
+  }
+}
