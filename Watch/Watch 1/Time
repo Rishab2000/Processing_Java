@@ -1,0 +1,115 @@
+class clock {
+  float r;
+  float a;
+  float b;
+  float theta;
+  float angle;
+
+  clock() {
+    r = 174;
+    a = 0;
+    b = 0;
+  }
+
+  void render() {
+    float s = second();
+    float m = minute();
+    float h = hour();
+    pushMatrix();
+    stroke(255);
+    translate(width/2, height/2);
+    noFill();
+    pushMatrix();
+    rotate(radians(-90));
+    float end1 = map(s, 0, 60, 0, 360);
+    float A= radians(end1);
+    strokeWeight(10);
+    stroke(12, 248, 227);
+    arc(0, 0, 450, 450, 0, A);
+    float end2 = map(m, 0, 60, 0, 360);
+    float B= radians(end2);
+    stroke(255, 69, 159);
+    arc(0, 0, 420, 420, 0, B);
+    float end3 = map(h%12, 0, 12, 0, 360);
+    float C= radians(end3);
+    stroke(197, 0, 255);
+    arc(0, 0, 390, 390, 0, C);
+    popMatrix();
+    //circle(a, b, r*2);
+    
+   
+    //popMatrix();
+  }
+
+  void sec() {
+    float s = second();
+
+    pushMatrix();
+    theta = s*6;
+    angle = radians(theta);
+    rotate(angle);
+    strokeWeight(8);
+    stroke(12, 248, 227);
+    line(0, 0, 0, -170);
+    println(theta, s);
+
+    popMatrix();
+  }
+
+  void minu() {
+
+    float m = minute();
+    pushMatrix();
+    theta = m * 6;
+    angle = radians(theta);
+    rotate(angle);
+    strokeWeight(8);
+    stroke(255, 69, 159);
+    line(0, 0, 0, -130);
+    popMatrix();
+  }
+
+  void hr() {
+    float h = hour();
+    pushMatrix();    
+    theta = h * 30;
+    angle = radians(theta);
+    rotate(angle);
+    strokeWeight(8);
+    stroke(197, 0, 255);
+    line(0, 0, 0, -90);
+    strokeWeight(1);
+    fill(255);
+    circle(a, b, 11);
+    popMatrix();
+    popMatrix();
+  }
+
+  void markingshr() {
+    for ( int t = 0; t <= 12; t ++) {
+      strokeWeight(4);
+      stroke(197, 0, 255);
+      float angle = radians(t*(360/12));
+      float x1 = width/2 + r*cos(angle);
+      float y1 = height/2 + r*sin(angle);
+      float x2 = width/2 + (r-15)*cos(angle);
+      float y2 = height/2 + (r-15)*sin(angle);
+      line(x1, y1, x2, y2);
+    }
+   
+    
+  }
+  
+  void markingsmn(){
+     for ( int t = 0; t <= 60; t ++) {
+      strokeWeight(1.5);
+      stroke(255, 69, 159);
+      float angle = radians(t*(360/60));
+      float x1 = width/2 + r*cos(angle);
+      float y1 = height/2 + r*sin(angle);
+      float x2 = width/2 + (r-10)*cos(angle);
+      float y2 = height/2 + (r-10)*sin(angle);
+      line(x1, y1, x2, y2);
+    }
+  }
+}
