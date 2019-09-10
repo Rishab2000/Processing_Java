@@ -1,0 +1,30 @@
+walker[] w = new walker [20];
+int count = 3;
+
+void setup () {
+  size( 600, 400);
+  for (int i=0; i<count; i++) {
+    w[i] = new walker(random(0,100000) ,random(0,100000));
+  }
+}
+
+void draw() {
+  background(0);
+  for (int i=0; i<count; i++) {
+    w[i].render();
+    w[i].movement();
+  }
+}
+
+void mouseClicked() {
+  for (int i=0; i<count; i++) {
+    if (w[i].pause()) {
+      noLoop();
+    }
+    if (w[i].play()) {
+      loop();
+    }
+    w[i].pause_counter();
+    w[i].play_counter();
+  }
+}
