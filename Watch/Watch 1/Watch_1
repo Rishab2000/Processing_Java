@@ -1,0 +1,18 @@
+clock c;
+
+void setup(){
+  size (500,500);
+  c = new clock();
+  smooth();
+}
+
+void draw(){
+  background(0);
+  
+  c.render();
+  c.sec();
+  c.minu();
+  c.hr();
+  c.markingshr();
+  c.markingsmn();
+}
